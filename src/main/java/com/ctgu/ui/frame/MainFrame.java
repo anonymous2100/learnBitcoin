@@ -1,7 +1,5 @@
 package com.ctgu.ui.frame;
 
-import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -9,14 +7,11 @@ import javax.swing.JTabbedPane;
 import com.ctgu.constant.Constants;
 import com.ctgu.ui.Init;
 import com.ctgu.ui.component.TopMenuBar;
-import com.ctgu.ui.form.AllVanityAddressPanel;
 import com.ctgu.ui.form.BitcoinAddressPanel;
 import com.ctgu.ui.form.BitcoinAddressPanel2;
 import com.ctgu.ui.form.BrainwalletPanel;
 import com.ctgu.ui.form.PrivateKeyPanel;
 import com.ctgu.ui.form.VanityAddressPanel;
-import com.ctgu.ui.form.VanityMultiplyAddressPanel;
-import com.ctgu.ui.form.VanitySumAddressPanel;
 import com.formdev.flatlaf.extras.FlatSVGUtils;
 
 public class MainFrame extends JFrame
@@ -28,12 +23,9 @@ public class MainFrame extends JFrame
 
 	private BitcoinAddressPanel botcoinAddressPanel;
 	private BitcoinAddressPanel2 botcoinAddressPanel2;
-	private VanityMultiplyAddressPanel vanityMultiplyAddressPanel;
 	private PrivateKeyPanel privateKeyPanel;
 	private BrainwalletPanel brainwalletPanel;
-	private VanitySumAddressPanel vanitySumAddressPanel;
 	private VanityAddressPanel vanityAddressPanel;
-	private AllVanityAddressPanel allVanityAddressPanel;
 
 	public MainFrame()
 	{
@@ -54,7 +46,6 @@ public class MainFrame extends JFrame
 	{
 		mainPanel = new JPanel();
 		mainPanel.setLayout(null);
-		mainPanel.setBackground(Color.green);
 		this.setContentPane(mainPanel);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
@@ -71,15 +62,6 @@ public class MainFrame extends JFrame
 
 		vanityAddressPanel = new VanityAddressPanel();
 		tabbedPane.addTab("虚荣地址", vanityAddressPanel);
-
-		allVanityAddressPanel = new AllVanityAddressPanel();
-		tabbedPane.addTab("所有虚荣地址", allVanityAddressPanel);
-
-		vanitySumAddressPanel = new VanitySumAddressPanel();
-		tabbedPane.addTab("Storage", vanitySumAddressPanel);
-
-		vanityMultiplyAddressPanel = new VanityMultiplyAddressPanel();
-		tabbedPane.addTab("Network", vanityMultiplyAddressPanel);
 
 		brainwalletPanel = new BrainwalletPanel();
 		tabbedPane.addTab("脑钱包", brainwalletPanel);
