@@ -39,7 +39,7 @@ public class MainFrame extends JFrame
 	{
 		this.setName(Constants.APP_NAME);
 		this.setTitle(Constants.APP_NAME);
-		this.setSize(1100, 1250);
+		this.setSize(1200, 1350);
 		setIconImages(FlatSVGUtils.createWindowIconImages("/icons/coin-bitcoin.svg"));
 
 		TopMenuBar topMenuBar = TopMenuBar.getInstance();
@@ -58,25 +58,31 @@ public class MainFrame extends JFrame
 		this.setContentPane(mainPanel);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPane.setBounds(0, 0, 1100, 1250);
+		tabbedPane.setBounds(0, 0, 1100, 1350);
 
 		botcoinAddressPanel = new BitcoinAddressPanel();
 		tabbedPane.addTab("未压缩公钥比特币地址", botcoinAddressPanel);
+
 		botcoinAddressPanel2 = new BitcoinAddressPanel2();
 		tabbedPane.addTab("压缩公钥比特币地址", botcoinAddressPanel2);
 
 		privateKeyPanel = new PrivateKeyPanel();
+		tabbedPane.addTab("私钥格式转换", privateKeyPanel);
+
 		vanityAddressPanel = new VanityAddressPanel();
+		tabbedPane.addTab("虚荣地址", vanityAddressPanel);
+
 		allVanityAddressPanel = new AllVanityAddressPanel();
+		tabbedPane.addTab("所有虚荣地址", allVanityAddressPanel);
+
 		vanitySumAddressPanel = new VanitySumAddressPanel();
-		vanityMultiplyAddressPanel = new VanityMultiplyAddressPanel();
-		brainwalletPanel = new BrainwalletPanel();
-		tabbedPane.addTab("Detail", privateKeyPanel);
-		tabbedPane.addTab("Memory", vanityAddressPanel);
-		tabbedPane.addTab("CPU", allVanityAddressPanel);
 		tabbedPane.addTab("Storage", vanitySumAddressPanel);
+
+		vanityMultiplyAddressPanel = new VanityMultiplyAddressPanel();
 		tabbedPane.addTab("Network", vanityMultiplyAddressPanel);
-		tabbedPane.addTab("Variables", brainwalletPanel);
+
+		brainwalletPanel = new BrainwalletPanel();
+		tabbedPane.addTab("脑钱包", brainwalletPanel);
 
 		mainPanel.add(tabbedPane);
 	}

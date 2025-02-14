@@ -1,5 +1,6 @@
 package com.ctgu.util;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -136,7 +137,7 @@ public class BitcoinUtils
 	}
 
 	/**
-	 * 获取可以导入到钱包格式的私钥（WIF格式）
+	 * 原始私钥 转换为 可导入到钱包格式的私钥（WIF格式）
 	 * 
 	 * @param privateKey
 	 *            非压缩格式私钥
@@ -144,27 +145,40 @@ public class BitcoinUtils
 	 */
 	public static String getWIFPrivateKey(String privateKey)
 	{
-		log.info("1-私钥：" + privateKey);
-
+		log.info("[PrivateKey ---> WIF] 1-私钥：" + privateKey);
 		String addVersionString = new StringBuffer("80").append(privateKey).toString();
-		log.info("2-增加0x80版本号：" + addVersionString);
-
+		log.info("[PrivateKey ---> WIF] 2-增加0x80版本号：" + addVersionString);
 		byte[] hash256OfAddVersion2 = getHash256(addVersionString);
-		log.info("3-对2得到的结果进行sha-256哈希运算：" + HexUtils.encodeHex(hash256OfAddVersion2));
-
+		log.info("[PrivateKey ---> WIF] 3-对2得到的结果进行sha-256哈希运算：" + HexUtils.encodeHex(hash256OfAddVersion2));
 		byte[] hash256OfAddVersion3 = getHash256(HexUtils.encodeHex(hash256OfAddVersion2));
-		log.info("4-再次对3得到的结果进行sha-256哈希运算：" + HexUtils.encodeHex(hash256OfAddVersion3));
-
+		log.info("[PrivateKey ---> WIF] 4-再次对3得到的结果进行sha-256哈希运算：" + HexUtils.encodeHex(hash256OfAddVersion3));
 		String first4bytes = HexUtils.encodeHex(hash256OfAddVersion3).substring(0, 8);
-		log.info("5-取4得到的结果的前四个字节作为效验位：" + first4bytes);
-
+		log.info("[PrivateKey ---> WIF] 5-取4得到的结果的前四个字节作为效验位：" + first4bytes);
 		String addResult = addVersionString + first4bytes;
-		log.info("6-将5得到的效验位加在2的结果的后面：" + addResult);
-
+		log.info("[PrivateKey ---> WIF] 6-将5得到的效验位加在2的结果的后面：" + addResult);
 		String base58Result = Base58.encode(HexUtils.decodeHex(addResult));
-		log.info("7-使用base58对6的结果进行编码：" + base58Result);
-
+		log.info("[PrivateKey ---> WIF] 7-使用base58对6的结果进行编码：" + base58Result);
 		return base58Result;
+	}
+
+	/**
+	 * WIF格式私钥转为原始私钥
+	 * 
+	 * @param privateKey
+	 *            非压缩格式私钥
+	 * @return
+	 */
+	public static String getOriginPrivateKeyFromWIF(String wifPrivateKey)
+	{
+		System.out.println("[WIF ---> PrivateKey] 1- wifPrivateKey= " + wifPrivateKey);
+		byte[] bytes = Base58.decode(wifPrivateKey);
+		String hexString = HexUtils.encodeHex(bytes);
+		System.out.println("[WIF ---> PrivateKey] 2- hexString= " + hexString);
+		String subStringOfBase58 = hexString.substring(0, hexString.length() - 8);
+		System.out.println("[WIF ---> PrivateKey] 3- subStringOfBase58= " + subStringOfBase58);
+		String privateKeyDecoded = subStringOfBase58.substring(2, subStringOfBase58.length());
+		System.out.println("[WIF ---> PrivateKey] 4- privateKeyDecoded= " + privateKeyDecoded);
+		return privateKeyDecoded;
 	}
 
 	/**
@@ -276,9 +290,9 @@ public class BitcoinUtils
 		log.info("地址：" + key.toAddress(params));
 	}
 
-	public static void main(String[] args) throws NoSuchAlgorithmException
+	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException
 	{
-		getRandomBTCAddress();
+		// getRandomBTCAddress();
 		// demoBTC();
 		// getWIFPrivateKey("0C28FCA386C7A227600B2FE50B7CAE11EC86D3BF1FBE471BE89827E19D72AA1D");
 	}
