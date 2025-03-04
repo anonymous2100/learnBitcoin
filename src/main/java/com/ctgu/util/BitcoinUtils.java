@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class BitcoinUtils
 {
 	/**
-	 * 获取私钥
+	 * 随机获取一个私钥
 	 * 
 	 * @return
 	 */
@@ -39,7 +39,7 @@ public class BitcoinUtils
 	}
 
 	/**
-	 * 获取公钥
+	 * 根据私钥计算公钥
 	 * 
 	 * @return
 	 */
@@ -55,7 +55,7 @@ public class BitcoinUtils
 	}
 
 	/**
-	 * 根据非压缩公钥获取压缩公钥
+	 * 根据非压缩公钥计算压缩公钥
 	 * 
 	 * @param userPublicKey
 	 *            非压缩公钥
@@ -137,7 +137,7 @@ public class BitcoinUtils
 	}
 
 	/**
-	 * 原始私钥 转换为 可导入到钱包格式的私钥（WIF格式）
+	 * 将原始私钥 转换为 可导入到钱包格式的私钥（WIF格式）
 	 * 
 	 * @param privateKey
 	 *            非压缩格式私钥
@@ -162,7 +162,7 @@ public class BitcoinUtils
 	}
 
 	/**
-	 * WIF格式私钥转为原始私钥
+	 * 将WIF格式私钥 转换为 原始私钥
 	 * 
 	 * @param privateKey
 	 *            非压缩格式私钥
@@ -269,31 +269,9 @@ public class BitcoinUtils
 		return step9String;
 	}
 
-	public static void demoBTC()
-	{
-		NetworkParameters params = MainNetParams.get();// 生成正式链地址用这个
-		// NetworkParameters params = TestNet2Params.get();//test2
-		// NetworkParameters params = TestNet3Params.get();//test3
-		// 生成地址
-		ECKey key = new ECKey();
-		log.info("地址：" + key.toAddress(params).toString());
-		log.info("公钥：" + key.getPublicKeyAsHex());
-		log.info("私钥（非压缩，不可导入钱包）：" + key.getPrivateKeyAsHex());
-		log.info("私钥（压缩格式，可导入钱包）：" + key.getPrivateKeyAsWiF(params));
-
-		// 根据上面不能导进IMtoken的私钥获得可以导进IMtoken的私钥：
-		String privateKey = key.getPrivateKeyAsHex();
-		log.info("原始格式私钥：" + privateKey);
-		BigInteger priKey = new BigInteger(privateKey, 16);
-		key = ECKey.fromPrivate(priKey);
-		log.info("WIF私钥：" + key.getPrivateKeyAsWiF(params));
-		log.info("地址：" + key.toAddress(params));
-	}
-
 	public static void main(String[] args) throws NoSuchAlgorithmException, UnsupportedEncodingException
 	{
-		// getRandomBTCAddress();
-		// demoBTC();
-		// getWIFPrivateKey("0C28FCA386C7A227600B2FE50B7CAE11EC86D3BF1FBE471BE89827E19D72AA1D");
+		 getRandomBTCAddress();
+		 //getWIFPrivateKey("0C28FCA386C7A227600B2FE50B7CAE11EC86D3BF1FBE471BE89827E19D72AA1D");
 	}
 }
