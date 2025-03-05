@@ -78,4 +78,17 @@ public class Constants
 	public static final int REFRESH_SLOW = 5000;
 
 	public static final int REFRESH_SLOWER = 15_000;
+	
+	
+	
+	public static final int PANEL_WIDTH = 1100;
+	public static final int INNER_PANEL_WIDTH = 1150;
+	public static final int PANEL_HEIGHT = 600;
+	public static final int COMPONENT_WIDTH = 780;
+	public static final int COMPONENT_HEIGHT = 28;
+	public static final int BUTTON_WIDTH = 120;
+	public static final int BUTTON_HEIGHT = COMPONENT_HEIGHT;
+	public static final int GAP_WIDTH = 5;
+
+	public static final int PANEL_COMPONENT_WIDTH = 150;
 }

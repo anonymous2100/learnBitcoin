@@ -1,5 +1,5 @@
 # LearnBitcoin
-![logo](assets/windows/Bitcoin-ico.png)
+![logo](assets/windows/bitcoin.png)
 
 比特币地址生成工具
 
@@ -13,9 +13,12 @@
 
 更多主题:
 
-![Theme](screenshot/theme_windows.png)
+![Theme](assets/screenshots/1.png)
+![Theme](assets/screenshots/2.png)
+![Theme](assets/screenshots/3.png)
 
-[More Screenshot on Windows](screenshot/)
+
+
 ## 下载
 [https://github.com/anonymous2100/learnBitcoin/releases](https://github.com/anonymous2100/learnBitcoin/releases)  
 

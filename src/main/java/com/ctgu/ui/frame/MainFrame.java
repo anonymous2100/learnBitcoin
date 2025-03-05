@@ -52,7 +52,7 @@ public class MainFrame extends JFrame
 		this.setContentPane(mainPanel);
 
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP, JTabbedPane.SCROLL_TAB_LAYOUT);
-		tabbedPane.setBounds(0, 0, 1200, 1200);
+		tabbedPane.setBounds(0, 0, 1250, 1200);
 
 		botcoinAddressPanel = new BitcoinAddressPanel();
 		tabbedPane.addTab("未压缩公钥比特币地址", botcoinAddressPanel);
